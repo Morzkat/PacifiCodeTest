@@ -1,0 +1,20 @@
+<template>
+  <ux-dialog>
+    <ux-dialog-body>
+      <h2>Error List</h2>
+      <ul repeat.for="model of errors">${humanize(model.key)}
+        <li repeat.for="description of model.errors">
+          ${description}
+        </li>
+
+      </ul>
+    </ux-dialog-body>
+
+    <ux-dialog-footer>
+      <button click.trigger="controller.cancel()">Cancel</button>
+      <button click.trigger="controller.ok(person)">Ok</button>
+    </ux-dialog-footer>
+  </ux-dialog>
+</template>
+
+

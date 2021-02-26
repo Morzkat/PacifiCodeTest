@@ -1,0 +1,9 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.form-control-has-error {
+  border-color: red;
+}
+
+.validation-message {
+  color: #d81515;
+}
