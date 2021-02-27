@@ -26,6 +26,6 @@
       </div>
 
       <button type="submit" class="btn btn-primary" disabled.bind="controller.errors.length > 0 || !formIsValid">Submit</button>
-      <button type="submit" class="btn btn-primary" disabled.bind="!(canResetForm.size > 0)" click.trigger="openDialog()">Reset</button>
+      <button type="submit" class="btn btn-primary" disabled.bind="!(canResetForm.size > 0)" click.trigger="resetForm()">Reset</button>
     </form>
 </template>

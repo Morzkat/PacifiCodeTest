@@ -10,7 +10,6 @@ import { HttpErrorDialog } from "../dialogs/error-dialog/http-error-dialog";
 @inject(DialogService)
 @autoinject
 export class HttpService {
-
   dialogService: DialogService = null;
   httpClient: HttpClient = null;
 
@@ -23,15 +22,13 @@ export class HttpService {
     console.log(dialogService);
   }
 
- 
-
-  get(endpoint: string): Promise<HttpResponse> {
+  get<T>(endpoint: string): Promise<HttpResponse<T>> {
     return this.httpClient
       .fetch(`${endpoint}`)
       .then((response) => response.json());
   }
 
-  post<T>(endpoint: string, body: T): Promise<HttpResponse> {
+  post<T, X>(endpoint: string, body: X): Promise<HttpResponse<T>> {
     return this.httpClient
       .post(`${endpoint}`, json(body))
       .then((response) => response.json());
@@ -43,7 +40,6 @@ export class HttpInterceptors implements Interceptor {
   constructor(dialogService: DialogService) {
     this.dialogService = dialogService;
     console.log(dialogService);
-    
   }
 
   request(message) {
@@ -52,22 +48,16 @@ export class HttpInterceptors implements Interceptor {
   }
 
   async response(response: Response) {
-    console.log(response);
-    const result = await response.json();
-
-    this.dialogService.open({ viewModel: HttpErrorDialog, model: result.errors, lock: false })
-      .whenClosed(response => {
-        if (!response.wasCancelled) {
-          // this.resetForm();
-        }
-    });
-
-    if (response.status >= 500) {
-      throw result;
-    }
-
-    if (response.status >= 400) {
-      throw result;
+    if (response.status < 200 || response.status > 299 ) {
+      const result = await response.json();
+      this.dialogService
+        .open({ viewModel: HttpErrorDialog, model: result.errors, lock: false })
+        .whenClosed((response) => {
+          if (!response.wasCancelled) {
+            // this.resetForm();
+          }
+        });
+      throw response;
     }
 
     return response;
