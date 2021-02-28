@@ -23,8 +23,6 @@ export class AssetDetails {
         emailAdressOfDepartment: result.payload.emailAdressOfDepartment,
         purchaseDate: result.payload.purchaseDate,
       };
-      console.log(this.asset.purchaseDate)
-      console.log(result.payload.purchaseDate)
     });
   }
 }

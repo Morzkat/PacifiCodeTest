@@ -19,7 +19,6 @@ export class HttpService {
       client.withBaseUrl(environment.assetsApi);
       client.withInterceptor(new HttpInterceptors(this.dialogService));
     });
-    console.log(dialogService);
   }
 
   get<T>(endpoint: string): Promise<HttpResponse<T>> {
@@ -39,12 +38,22 @@ export class HttpInterceptors implements Interceptor {
   dialogService: DialogService = null;
   constructor(dialogService: DialogService) {
     this.dialogService = dialogService;
-    console.log(dialogService);
   }
 
   request(message) {
-    console.log("request: ", message);
     return message;
+  }
+
+  responseError(error: any, request?: Request, httpClient?: HttpClient): Response | Promise<Response> {
+    this.dialogService
+    .open({ viewModel: HttpErrorDialog, model: {'ServerError': ['Server fail did not respond']}, lock: false })
+    .whenClosed((response) => {
+      if (!response.wasCancelled) {
+        return;
+      }
+    });
+
+    return null;
   }
 
   async response(response: Response) {
@@ -54,7 +63,7 @@ export class HttpInterceptors implements Interceptor {
         .open({ viewModel: HttpErrorDialog, model: result.errors, lock: false })
         .whenClosed((response) => {
           if (!response.wasCancelled) {
-            // this.resetForm();
+            return;
           }
         });
       throw response;

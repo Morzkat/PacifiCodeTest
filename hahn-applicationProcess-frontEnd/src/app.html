@@ -1,15 +1,7 @@
-<!-- <template>
-  
-  <require from="./resources/forms/asset/asset-form"></require>
-  <div class="col">
-          <asset-form></asset-form>
-        </div>
-</template> -->
-
 <template>
   <require from="./assets/styles/main.css"></require>
-  <require from="./components/navigation/navigation.html"></require>
-  <navigation router.bind="router" class="primary-navigation"></navigation>
+  <require from="./components/shared/navigation/navigation"></require>
+  <navigation class="primary-navigation"></navigation>
   <div class="container">
     <router-view></router-view>
   </div>
