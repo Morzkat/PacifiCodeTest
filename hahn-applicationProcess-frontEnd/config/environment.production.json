@@ -1,5 +1,5 @@
 {
   "debug": false,
   "testing": false,
-  "assetsApi":"https://localhost:44337/api"
+  "assetsApi":"http://localhost:5500/api/"
 }

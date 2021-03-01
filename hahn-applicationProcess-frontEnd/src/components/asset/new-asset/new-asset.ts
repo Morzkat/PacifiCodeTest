@@ -58,8 +58,8 @@ export class NewAsset {
 
     this.httpService
       .post<string, Asset>("Assets", this.asset)
-      .then((response) => {       
-        this.router.navigate(`assets/${response.title}/details`);
+      .then((response) => {     
+        this.router.navigate(`assets/${response.payload}/details`);
       })
       .catch((error) => {
         console.log(error);
@@ -80,7 +80,7 @@ export class NewAsset {
     this.validator
       .validateObject(this.asset)
       .then(
-        (results) =>
+        results =>
           (this.formIsValid = results.every((result) => result.valid))
       );
   }

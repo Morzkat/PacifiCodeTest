@@ -27,8 +27,13 @@
         <input type="email" class="form-control" id="email" placeholder="Email" value.bind="asset.emailAdressOfDepartment & validateOnChange">
       </div>
 
-      <button i18n="list_asset:save_btn" type="submit" class="btn btn-primary" disabled.bind="controller.errors.length > 0 || !formIsValid">Submit</button>
-      <button i18n="list_asset:reset_btn" type="submit" class="btn btn-primary" disabled.bind="!(canResetForm.size > 0)" click.trigger="resetForm()">Reset</button>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="broken" checked.bind="asset.broken & validateOnChange">
+        <label class="form-check-label" for="broken" >Broken</label>
+      </div>
+
+      <button i18n="new_asset:save_btn" type="submit" class="btn btn-primary" disabled.bind="controller.errors.length > 0 || !formIsValid">Submit</button>
+      <button i18n="new_asset:reset_btn" type="submit" class="btn btn-primary" disabled.bind="!(canResetForm.size > 0)" click.trigger="resetForm()">Reset</button>
     </form>
   </div>
 </template>

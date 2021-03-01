@@ -46,6 +46,7 @@ export function configure(aurelia: Aurelia): void {
               col_department:"Department",
               col_email:"Email",
               col_purchase_date:"Purchase Date",
+              col_broken:"Broken",
             },
             new_asset: {
               title: "Add new assets",
@@ -78,6 +79,7 @@ export function configure(aurelia: Aurelia): void {
               col_department:"Departamento",
               col_email:"Correo",
               col_purchase_date:"Día de compra",
+              col_broken:"Esta roto?",
             },
             new_asset: {
               title: "Agregar nuevo assets",

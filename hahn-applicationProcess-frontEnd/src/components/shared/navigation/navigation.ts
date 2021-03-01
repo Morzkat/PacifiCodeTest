@@ -10,45 +10,8 @@ export class Navigation {
 
   constructor(i18n: I18N, config: RouterConfiguration, router: Router) {
     this.i18n = i18n;
-    this.configureRouter(config, router);
-
-    console.log(this.router);
-  }
-
-  configureRouter(config: RouterConfiguration, router: Router): void {
-    console.log('herer');
-    
-    config.title = "Aurelia";
-    config.map([
-      {
-        route: "assets",
-        name: "list_assets",
-        moduleId: PLATFORM.moduleName(
-          "components/asset/list-assets/list-assets"
-        ),
-        nav: true,
-        title: "List of assets",
-      },
-      {
-        route: "assets/:id/details",
-        name: "details_assets",
-        moduleId: PLATFORM.moduleName(
-          "components/asset/asset-details/asset-details"
-        ),
-        nav: false,
-        title: "Details of assets",
-      },
-      {
-        route: "assets/new",
-        name: "new_asset",
-        moduleId: PLATFORM.moduleName("components/asset/new-asset/new-asset"),
-        nav: true,
-        title: "New asset",
-      },
-    ]);
-
-    console.log(router);
     this.router = router;
+    console.log(this.router);
   }
 
   setLocale(locale: string): void {
