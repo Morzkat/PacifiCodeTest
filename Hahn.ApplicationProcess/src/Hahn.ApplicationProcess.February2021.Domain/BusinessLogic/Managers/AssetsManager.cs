@@ -91,7 +91,7 @@ namespace KHahn.ApplicationProcess.February2021.Domain.BusinessLogic.Managers
                 await _unitOfWork.SaveAsync();
 
                 //Logger.
-                return ResponseHelper.NewResult(HttpStatusCode.OK, ResponseHelper.NewResponseWithElement($"Assets/{newAsset.Id}"));
+                return ResponseHelper.NewResult(HttpStatusCode.OK, ResponseHelper.NewResponseWithElement($"{newAsset.Id}"));
             }
             catch (Exception ex)
             {

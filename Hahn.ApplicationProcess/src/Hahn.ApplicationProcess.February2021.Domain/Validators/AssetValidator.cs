@@ -11,9 +11,10 @@ namespace KHahn.ApplicationProcess.February2021.Domain.Validators
         public AssetValidator(ICountryHttpClient countryHttpClient)
         {
             RuleFor(x => x.AssetName).MinimumLength(5);
-            RuleFor(x => x.Department).Custom((deparment, context) =>
+            RuleFor(x => x.Department)
+                .Custom((deparment, context) =>
             {
-                if(!Enum.TryParse("Active", out Department department))
+                if(!Enum.TryParse(deparment, out Department department))
                     context.AddFailure("Is not a valid department type.");
             });
             RuleFor(x => x.CountryOfDepartment).NotNull().Custom((country, context) =>

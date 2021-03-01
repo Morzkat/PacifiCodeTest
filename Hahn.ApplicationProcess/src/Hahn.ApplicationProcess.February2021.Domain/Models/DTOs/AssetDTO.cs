@@ -11,7 +11,7 @@ namespace KHahn.ApplicationProcess.February2021.Domain.Models.DTOs
     {
         public int ID { get; set; }
         public string AssetName { get; set; }
-        public Department Department { get; set; }
+        public string Department { get; set; }
         public string CountryOfDepartment { get; set; }
         public string EmailAdressOfDepartment { get; set; }
         public string PurchaseDate { get; set; }
