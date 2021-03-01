@@ -33,7 +33,9 @@ namespace KHahn.ApplicationProcess.February2021.Web
             services.AddControllers().AddFluentValidation(config =>
                config.RegisterValidatorsFromAssemblies(Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load)));
 
-            services.AddDbContext<KHahnApplicationProcessContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:KHahnApplicationProcessDatabase"]));
+            //services.AddDbContext<KHahnApplicationProcessContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:KHahnApplicationProcessDatabase"]));
+
+            services.AddDbContext<KHahnApplicationProcessContext>(options => options.UseInMemoryDatabase(databaseName: "HahnApplicationProcess"));
 
             services.AddHttpClient();
             services.SetupUnitOfWork();
@@ -65,11 +67,10 @@ namespace KHahn.ApplicationProcess.February2021.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KHahn.ApplicationProcess.February2021.Web v1"));
-            }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KHahn.ApplicationProcess.February2021.Web v1"));
 
             app.UseHttpsRedirection();
 

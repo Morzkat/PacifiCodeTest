@@ -1,6 +1,7 @@
-export class HttpResponse {
+export class HttpResponse<T> {
   title: string;
   errors: Array<string>;
+  payload: T;
 }
 
 

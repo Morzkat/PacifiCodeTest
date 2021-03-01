@@ -8,6 +8,11 @@ import { ValidationRules } from "aurelia-validation";
     purchaseDate: string;
     broken: boolean;
     emailAdressOfDepartment: string;
+
+    constructor() {
+      this.broken = false;
+    }
+
   }
   
   ValidationRules

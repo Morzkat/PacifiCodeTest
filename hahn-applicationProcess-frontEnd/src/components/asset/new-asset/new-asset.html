@@ -1,0 +1,39 @@
+<template>
+  <div class="col">
+    <h3 i18n="new_asset:title">Add new Asset</h3>
+    <form submit.delegate="submit()">
+      <div class="form-group">
+        <label i18n="list_asset:col_asset_name" class="control-label" for="first">Asset Name</label>
+        <input type="text" class="form-control" id="asset-name" placeholder="Asset Name" value.bind="asset.assetName & validateOnChange">
+      </div>
+
+      <div class="form-group">
+        <label i18n="list_asset:col_department" class="control-label" for="last">Department</label>
+        <input type="text" class="form-control" id="department" placeholder="Department" value.bind="asset.department & validateOnChange">
+      </div>
+
+      <div class="form-group">
+        <label i18n="list_asset:col_country" class="control-label" for="last">Country</label>
+        <input type="text" class="form-control" id="country" placeholder="Country" value.bind="asset.countryOfDepartment & validateOnChange">
+      </div>
+
+      <div class="form-group">
+        <label i18n="list_asset:col_purchase_date" class="control-label" for="last">Purchase Date</label>
+        <input type="date" class="form-control" id="purchaseDate" placeholder="Purchase Date" value.bind="asset.purchaseDate & validateOnChange">
+      </div>
+
+      <div class="form-group">
+        <label i18n="list_asset:col_email" class="control-label" for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Email" value.bind="asset.emailAdressOfDepartment & validateOnChange">
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="broken" checked.bind="asset.broken & validateOnChange">
+        <label class="form-check-label" for="broken" >Broken</label>
+      </div>
+
+      <button i18n="new_asset:save_btn" type="submit" class="btn btn-primary" disabled.bind="controller.errors.length > 0 || !formIsValid">Submit</button>
+      <button i18n="new_asset:reset_btn" type="submit" class="btn btn-primary" disabled.bind="!(canResetForm.size > 0)" click.trigger="resetForm()">Reset</button>
+    </form>
+  </div>
+</template>

@@ -1,0 +1,15 @@
+<template>
+  <ux-dialog>
+    <ux-dialog-body>
+      <h2 i18n="reset_form:title">Reset Asset</h2>
+      <p i18n="reset_form:message">Are you sure want to reset form?</p>
+    </ux-dialog-body>
+
+    <ux-dialog-footer>
+      <button i18n="btn:cancel" click.trigger="controller.cancel()">Cancel</button>
+      <button i18n="btn:ok" click.trigger="controller.ok(person)">Ok</button>
+    </ux-dialog-footer>
+  </ux-dialog>
+</template>
+
+

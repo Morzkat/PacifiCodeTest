@@ -1,8 +1,8 @@
 import {
   ValidationRenderer,
   RenderInstruction,
-  ValidateResult
-} from 'aurelia-validation';
+  ValidateResult,
+} from "aurelia-validation";
 
 export class BootstrapFormRenderer {
   render(instruction: RenderInstruction): void {
@@ -24,19 +24,19 @@ export class BootstrapFormRenderer {
       return;
     }
 
-    const formGroup = element.closest('.form-group');
+    const formGroup = element.closest(".form-group");
 
     if (!formGroup) {
       return;
     }
 
     // add the has-error class to the enclosing form-group div
-    formGroup.classList.add('has-error');
-    element.closest('.form-control').classList.add('form-control-has-error');
+    formGroup.classList.add("has-error");
+    element.closest(".form-control").classList.add("form-control-has-error");
 
     // add help-block
-    const message = document.createElement('li');
-    message.className = 'help-block validation-message';
+    const message = document.createElement("li");
+    message.className = "help-block validation-message";
     message.textContent = result.message;
     message.id = `validation-message-${result.id}`;
     formGroup.appendChild(message);
@@ -47,8 +47,8 @@ export class BootstrapFormRenderer {
       return;
     }
 
-    const formGroup = element.closest('.form-group');
-    const inputElement = element.closest('.form-control');
+    const formGroup = element.closest(".form-group");
+    const inputElement = element.closest(".form-control");
     if (!formGroup) {
       return;
     }
@@ -59,12 +59,13 @@ export class BootstrapFormRenderer {
       formGroup.removeChild(message);
 
       // remove the has-error class from the enclosing form-group div
-      if (formGroup.querySelectorAll('.help-block.validation-message').length === 0) {
-        formGroup.classList.remove('has-error');
-        inputElement.classList.remove('form-control-has-error');
+      if (
+        formGroup.querySelectorAll(".help-block.validation-message").length ===
+        0
+      ) {
+        formGroup.classList.remove("has-error");
+        inputElement.classList.remove("form-control-has-error");
       }
     }
   }
 }
-
-

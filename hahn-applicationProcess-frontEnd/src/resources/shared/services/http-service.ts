@@ -10,7 +10,6 @@ import { HttpErrorDialog } from "../dialogs/error-dialog/http-error-dialog";
 @inject(DialogService)
 @autoinject
 export class HttpService {
-
   dialogService: DialogService = null;
   httpClient: HttpClient = null;
 
@@ -20,18 +19,15 @@ export class HttpService {
       client.withBaseUrl(environment.assetsApi);
       client.withInterceptor(new HttpInterceptors(this.dialogService));
     });
-    console.log(dialogService);
   }
 
- 
-
-  get(endpoint: string): Promise<HttpResponse> {
+  get<T>(endpoint: string): Promise<HttpResponse<T>> {
     return this.httpClient
       .fetch(`${endpoint}`)
       .then((response) => response.json());
   }
 
-  post<T>(endpoint: string, body: T): Promise<HttpResponse> {
+  post<T, X>(endpoint: string, body: X): Promise<HttpResponse<T>> {
     return this.httpClient
       .post(`${endpoint}`, json(body))
       .then((response) => response.json());
@@ -42,32 +38,35 @@ export class HttpInterceptors implements Interceptor {
   dialogService: DialogService = null;
   constructor(dialogService: DialogService) {
     this.dialogService = dialogService;
-    console.log(dialogService);
-    
   }
 
   request(message) {
-    console.log("request: ", message);
     return message;
   }
 
-  async response(response: Response) {
-    console.log(response);
-    const result = await response.json();
-
-    this.dialogService.open({ viewModel: HttpErrorDialog, model: result.errors, lock: false })
-      .whenClosed(response => {
-        if (!response.wasCancelled) {
-          // this.resetForm();
-        }
+  responseError(error: any, request?: Request, httpClient?: HttpClient): Response | Promise<Response> {
+    this.dialogService
+    .open({ viewModel: HttpErrorDialog, model: {'ServerError': ['Server fail did not respond']}, lock: false })
+    .whenClosed((response) => {
+      if (!response.wasCancelled) {
+        return;
+      }
     });
 
-    if (response.status >= 500) {
-      throw result;
-    }
+    return null;
+  }
 
-    if (response.status >= 400) {
-      throw result;
+  async response(response: Response) {
+    if (response.status < 200 || response.status > 299 ) {
+      const result = await response.json();
+      this.dialogService
+        .open({ viewModel: HttpErrorDialog, model: result.errors, lock: false })
+        .whenClosed((response) => {
+          if (!response.wasCancelled) {
+            return;
+          }
+        });
+      throw response;
     }
 
     return response;

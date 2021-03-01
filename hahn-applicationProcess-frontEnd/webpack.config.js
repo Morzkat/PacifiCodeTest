@@ -238,7 +238,7 @@ module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, h
     ...when(!tests, new DuplicatePackageCheckerPlugin()),
     new AureliaPlugin(),
     new ModuleDependenciesPlugin({
-      'aurelia-testing': ['./compile-spy', './view-spy']
+      'aurelia-testing': ['./compile-spy', './view-spy'],
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
@@ -255,7 +255,7 @@ module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, h
     ...when(!tests, new CopyWebpackPlugin({
       patterns: [
         { from: 'static', to: outDir, globOptions: { ignore: ['.*'] } }
-      ]
+      ],
     })), // ignore dot (hidden) files
     ...when(analyze, new BundleAnalyzerPlugin()),
     /**

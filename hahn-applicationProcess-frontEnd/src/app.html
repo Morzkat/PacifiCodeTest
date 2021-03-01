@@ -1,12 +1,8 @@
 <template>
   <require from="./assets/styles/main.css"></require>
-  <require from="./resources/forms/asset/asset-form"></require>
+  <require from="./components/shared/navigation/navigation"></require>
+  <navigation class="primary-navigation"></navigation>
   <div class="container">
-    <div class="row">
-     <div class="col">
-      <asset-form></asset-form>
-     </div>
-
-    </div>
+    <router-view></router-view>
   </div>
 </template>
